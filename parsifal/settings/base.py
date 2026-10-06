@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     "compressor",
     "crispy_forms",
+    "crispy_bootstrap3",
     "parsifal.apps.reviews",
     "parsifal.apps.reviews.planning",
     "parsifal.apps.reviews.conducting",
@@ -152,8 +153,6 @@ TIME_ZONE = config("TIME_ZONE", default="UTC")
 
 USE_I18N = True
 
-USE_L10N = True
-
 USE_TZ = True
 
 LANGUAGES = (("en-us", _("English")), ("pt-br", _("Brazilian Portuguese")))
@@ -181,7 +180,10 @@ STATICFILES_FINDERS = (
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR.parent.parent / "media/"
-DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"},
+}
 
 
 # ==============================================================================
@@ -190,6 +192,7 @@ DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
 
 COMPRESS_ENABLED = config("COMPRESS_ENABLED", default=not DEBUG, cast=bool)
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap3"
 CRISPY_TEMPLATE_PACK = "bootstrap3"
 
 ELSEVIER_API_KEY = config("ELSEVIER_API_KEY", default="")

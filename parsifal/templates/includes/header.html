@@ -36,7 +36,8 @@
               </a>
             </li>
             <li>
-              <a href="{% url "logout" %}">
+              <form method="post" action="{% url "logout" %}" id="logout-form" style="display: none;">{% csrf_token %}</form>
+              <a href="{% url "logout" %}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <span data-toggle="tooltip" data-placement="bottom" data-container="body" title="{% trans "Log out" %}">
                   <span class="glyphicon glyphicon-log-out"></span>
                 </span>
